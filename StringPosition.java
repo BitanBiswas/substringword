@@ -14,23 +14,27 @@ public class StringPosition {
 		String word = "barfoofoobarthefoobarman";
 	
 		
-		String[] permuatedWords = sp.addStrings(words);
-		int eachWordLength = permuatedWords[0].length();
+		List <String> permuatedWords = sp.addStrings(words);
+		int eachWordLength = permuatedWords.get(0).length();
 		
 		for(int i = 0; i<word.length()-eachWordLength; i++) {
-			for(int j=0;j<permuatedWords.length;j++) {
-				
-				if(permuatedWords[j].equals(word.substring(i,i+eachWordLength))) {
-					System.out.print( i + " ");
-				}
+			if(permuatedWords.contains(word.substring(i,i+eachWordLength))) {
+				System.out.println("The position " + i + " ");
 			}
+			
+//			for(int j=0;j<permuatedWords.length;j++) {
+//				
+//				if(permuatedWords[j].equals(word.substring(i,i+eachWordLength))) {
+//					System.out.print( i + " ");
+//				}
+//			}
 		}
 		
 	}
 
-	public static String[] addStrings(String[] words) {
+	public static List addStrings(String[] words) {
 
-		String[] letters = new String[words.length];
+		//String[] letters = new String[words.length];
 
 		// String str = "ABC";
 		String[] str = words;
@@ -41,12 +45,14 @@ public class StringPosition {
 		List<String> list = sp.permute(str, 0, n - 1);
 		
 		System.out.println("The size of the list is --> " + list.size());
-		for (int i = 0; i < list.size(); i++) {
-			System.out.println("The value in the set is " + list.get(i));
-			letters[i]=list.get(i);
-		}
+		
+		  for (int i = 0; i < list.size(); i++) {
+		  System.out.println("The value in the set is " + list.get(i));
+		//  letters[i]=list.get(i); 
+		  }
+		 
 
-		return letters;
+		return list;
 
 	}
 
@@ -63,13 +69,14 @@ public class StringPosition {
 			
 			oneWord.add(x);
 //			createList(x);
-			System.out.println("The value in x is " + x + "Size --> "+oneWord.size());
+			System.out.println("The value in x is " + x + " Size --> "+oneWord.get(0));
 			return oneWord;
 		} else {
 			for (int i = l; i <= r; i++) {
 				str = swap(str, l, i);
-				List<String> oneWord = permute(str, l + 1, r);
-				a.add(oneWord.get(0));
+				List<String> w = permute(str, l + 1, r);
+				a.add(w.get(0));
+				//System.out.println("The one word "+ oneWord.get(0));
 				str = swap(str, l, i);
 				//a.add(oneWord.get(0));
 			}
